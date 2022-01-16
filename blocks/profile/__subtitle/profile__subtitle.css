@@ -5,3 +5,16 @@
     font-weight: 400;
     line-height: 1.2;
 }
+
+@media screen and (max-width:900px) {
+    .profile__subtitle {
+        margin: 0 auto;
+    }
+    
+}
+
+@media screen and (max-width:600px) {
+    .profile__subtitle {
+        font-size: 14px;
+    }
+}

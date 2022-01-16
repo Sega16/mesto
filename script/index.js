@@ -13,15 +13,12 @@ let popupBtnSave = popup.querySelector('.popup__btn')
 
 let cards = content.querySelector('.cards');
 let card = cards.querySelector('.card');
-let likeBtn = cards.querySelectorAll('div.card .card__like');
+let likeBtnAll = card.querySelector('.card__like');
 
 function likeActive() {
-    let cardName = card.querySelector('.card__name');
-    cardName.innerHTML = 
-    `<p class="card__text">Карачаевск</p>
-    <img class="card__like link" src="./images/Like_img_active.svg" alt="лайк карточки">`
+    likeBtnAll.classList.add('card__like_active');
 }
-likeBtn.addEventListener('click', likeActive);
+likeBtnAll.addEventListener('click', likeActive);
 
 function PopupOpened() {
     popup.classList.add('popup_opened');

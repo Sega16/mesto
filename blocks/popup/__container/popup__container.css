@@ -7,8 +7,22 @@
     left: 50%;
     transform:translate(-50%, -50%);
     background-color: white;
-    width: 358px;
+    max-width: 358px;
     height: min-content;
     display: flex;
     flex-direction: column;
+}
+
+@media screen and (max-width:900px) {
+    .popup__container {
+        top: 20%;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .popup__container {
+        padding: 0 22px 0;
+        min-width: 238px;
+        top: 9.4%;
+    }
 }

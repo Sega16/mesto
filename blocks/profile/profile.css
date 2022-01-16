@@ -1,0 +1,8 @@
+
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #ffffff;
+    margin-bottom: 50px;
+}

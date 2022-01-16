@@ -1,0 +1,14 @@
+
+.popup__container {
+    padding: 0 36px 0;
+    border-radius: 10px;
+    position: absolute;
+    top: 30.4%;
+    left: 50%;
+    transform:translate(-50%, -50%);
+    background-color: white;
+    width: 358px;
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+}

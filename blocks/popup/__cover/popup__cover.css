@@ -1,0 +1,14 @@
+
+.popup__cover {
+    margin: 195px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 600px) {
+    .popup__cover {
+        margin-top: 123px;
+    }
+    
+}

@@ -7,16 +7,11 @@ let profileAdout = profile.querySelector('.profile__subtitle');
 
 let popup = document.querySelector('.popup');
 let popupClose = popup.querySelector('.popup__close');
-let popupBtnSave = popup.querySelector('.popup__btn');
-let popupName = popup.querySelector('div.popup__cover div.popup__container form.popup__form .popup__input_name');
-let popupAbout = popup.querySelector('div.popup__cover div.popup__container form.popup__form .popup__input_about');
-let popupForm = popup.querySelector('div.popup__cover div.popup__container form.popup__form');
+let popupName = popup.querySelector('.popup__input_type_name');
+let popupAbout = popup.querySelector('.popup__input_type_about');
+let popupForm = popup.querySelector('.popup__form');
 
-let cards = content.querySelector('.cards');
-let card = cards.querySelector('.card');
-let likeBtnAll = card.querySelector('.card__like');
-
-function PopupOpened() {
+function popupOpened() {
     popup.classList.add('popup_opened');
     popupName.value = profileName.textContent;
     popupAbout.value = profileAdout.textContent;
@@ -31,6 +26,6 @@ function formSubmitHandler(evt) {
 function closePopup() {
     popup.classList.remove('popup_opened');
 }
-btnEdit.addEventListener('click', PopupOpened);
+btnEdit.addEventListener('click', popupOpened);
 popupForm.addEventListener('submit', formSubmitHandler);
 popupClose.addEventListener('click', closePopup);

@@ -81,7 +81,7 @@ function renderPics() {
 // ============================ВОТ ТУТ СИЖУ УЖЕ 2 ДНЯ=================================
 
 function cardPics() {
-    let foto = cardPic;
+    let foto = document.querySelector('.card__img');
     const popupPic = templateImg.cloneNode(true);
     popupPic.querySelector('.popup_img-view').src = foto.src;
     popupImg.append(popupPic);

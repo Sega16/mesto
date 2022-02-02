@@ -25,9 +25,9 @@ let popupFormCards = popupCards.querySelector('.popup__form_cards');
 
 // ======================================POPUP IMG VARIABLES========================================//
 let popupImg = document.querySelector('.popup_img');
-let popupimgView = document.querySelector('.popup_img-view');
+let popupimgView = document.querySelector('.popup_img_view');
 let popupImgClose = document.querySelector('.popup__close_img');
-let popupImgCaption = document.querySelector('.popup_img-caption');
+let popupImgCaption = document.querySelector('.popup_img_caption');
 // =============================================CARDS VARIABLES======================================//
 let templateCard = document.querySelector('#template-card').content;
 let cards = content.querySelector('.cards');

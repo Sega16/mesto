@@ -5,7 +5,7 @@ const initialCards = [
     },
     {
       name: 'Нижний Тагил',
-      link: '../images/Tagil.jpg'
+      link: './images/Tagil.jpg'
     },
     {
       name: 'Иваново',
@@ -16,8 +16,8 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
     },
     {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+      name: 'Рейнисфияра',
+      link: './images/Black-beach.jpg'
     },
     {
       name: 'Байкал',

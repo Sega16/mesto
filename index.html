@@ -47,7 +47,7 @@
             <form class="popup__form popup__form_cards">
                 <input class="popup__input popup__input_type_title" placeholder="Название" type="text">
                 <input class="popup__input popup__input_type_link" placeholder="Ссылка на картинку" type="url">
-                <button type="submit" class="popup__btn popup__btn_add_card">Создать</button>
+                <button type="submit" class="popup__btn popup__btn_save_card">Создать</button>
             </form>
         </div>
     </div>
@@ -62,11 +62,12 @@
             </div>
         </div>
     </template>
-    <template id="template-img">
-        <img class="popup_img-view" src="" alt="большое фото">
-    </template>
     <div class="popup popup_img">
-        <!-- <img class="popup_img-view" src="" alt="большое фото"> -->
+        <figure class="popup__img-item">
+            <button type="button" class="popup__close popup__close_img link"></button>
+            <img class="popup_img-view" src="" alt="большое фото">
+            <figcaption class="popup_img-caption"></figcaption>
+        </figure>
     </div>
 
     <footer class="footer">

@@ -29,7 +29,7 @@ const popupFormCards = popupCards.querySelector('.popup__form_cards');
 // ======================================POPUP IMG VARIABLES========================================//
 const popupImg = document.querySelector('.popup_img');
 const popupimgView = document.querySelector('.img-view');
-const popupImgClose = document.querySelector('.popup__close_img');
+const btnPopupImgClose = document.querySelector('.popup__close_img');
 const popupImgCaption = document.querySelector('.img-caption');
 // =============================================CARDS VARIABLES======================================//
 const templateCard = document.querySelector('#template-card').content;

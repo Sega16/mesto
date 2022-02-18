@@ -123,7 +123,7 @@ function createCard() {
     popupCardInputLink.value = "";
     popupCardInputTitle.value = "";
     openPopup(popupCards);
-    
+
 }
 
 // закрфтие попапа новой карточки

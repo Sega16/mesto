@@ -69,11 +69,11 @@ function newCard(text) {
 }
 // получение NodeList
 function render() {
-    initialCards.forEach(stockeCards);
+    initialCards.forEach(renderInitialCards);
 
 }
 // создние стартовых карточек
-function stockeCards(text) {
+function renderInitialCards(text) {
     cards.prepend(newCard(text));
 }
 
@@ -81,7 +81,7 @@ function stockeCards(text) {
 // Сохранение новой карточки
 function addCard(evt) {
     evt.preventDefault();
-    stockeCards({ name: popupCardInputTitle.value, link: popupCardInputLink.value });
+    renderInitialCards({ name: popupCardInputTitle.value, link: popupCardInputLink.value });
     closePopup(popupCards);
 }
 render();
@@ -123,6 +123,7 @@ function createCard() {
     popupCardInputLink.value = "";
     popupCardInputTitle.value = "";
     openPopup(popupCards);
+    
 }
 
 // закрфтие попапа новой карточки
@@ -144,6 +145,21 @@ function closePopupImg() {
 }
 
 // ===============================================HANDLERS==================================================
+window.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup_opened')) {
+        const popupOpened = document.querySelector('.popup_opened');
+        closePopup(popupOpened);
+        evt.stopPropagation();
+    };
+});
+
+document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+        const popupOpened = document.querySelector('.popup_opened');
+        closePopup(popupOpened);
+        evt.stopPropagation();
+    };
+});
 
 btnAddCard.addEventListener('click', createCard);
 btnEdit.addEventListener('click', editProfile);

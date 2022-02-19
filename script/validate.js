@@ -23,14 +23,14 @@ function setEventListeners({ inputSelector, submitButtonSelector, ...restConfig 
 
   popupInputs.forEach((inputItem) => {
     inputItem.addEventListener('input', function () {
-      isValid(restConfig, inputItem);
+      checkInputValidity(restConfig, inputItem);
       checkСonditionBtn(restConfig, btn, formItem);
     });
   });
 }
 
 // проверка валидности поля и вызов ошибки
-function isValid({...restConfig}, inputItem) {
+function checkInputValidity({ ...restConfig }, inputItem) {
   if (!inputItem.validity.valid) {
     showInputError(restConfig, inputItem, inputItem.validationMessage);
   } else {
@@ -38,7 +38,8 @@ function isValid({...restConfig}, inputItem) {
   }
 }
 
-function checkСonditionBtn({inactiveButtonClass}, btn, formItem) {
+// управление состоянием кнопки
+function checkСonditionBtn({ inactiveButtonClass }, btn, formItem) {
   if (!formItem.checkValidity()) {
     btn.classList.add(inactiveButtonClass);
     btn.setAttribute('disabled', '');
@@ -49,14 +50,14 @@ function checkСonditionBtn({inactiveButtonClass}, btn, formItem) {
 }
 
 // добавляем класс с ошибкой
-function showInputError({inputErrorClass}, inputItem, errorMassage) {
+function showInputError({ inputErrorClass }, inputItem, errorMassage) {
   const formError = document.querySelector(`.${inputItem.id}-error`);
   inputItem.classList.add(inputErrorClass);
   formError.textContent = errorMassage;
 }
 
 // удаляем класс с ошибкой
-function hideInputError({inputErrorClass}, inputItem) {
+function hideInputError({ inputErrorClass }, inputItem) {
   const formError = document.querySelector(`.${inputItem.id}-error`);
   inputItem.classList.remove(inputErrorClass);
   formError.textContent = "";

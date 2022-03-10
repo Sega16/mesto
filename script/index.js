@@ -1,4 +1,7 @@
 
+import Card from "./card.js";
+console.log(Card)
+
 const popupItem = Array.from(document.querySelectorAll('.popup'));
 
 // ===========================================PROFILE VARIABLES===================================//
@@ -62,36 +65,35 @@ function likeCard(evt) {
 
 // ==========================================TEMPLATE=============================================//
 
-
 // шаблон создания карточки
-function creatCard(link) {
+function createTemplateCard(dataCard) {
     const objectCard = templateCard.cloneNode(true);
-    objectCard.querySelector('.card__text').textContent = link.name;
-    objectCard.querySelector('.card__img').src = link.link;
-    objectCard.querySelector('.card__img').alt = link.name;
-    addListeners(objectCard, link);
+    objectCard.querySelector('.card__text').textContent = dataCard.name;
+    objectCard.querySelector('.card__img').src = dataCard.link;
+    objectCard.querySelector('.card__img').alt = dataCard.name;
+    addListeners(objectCard, dataCard);
     return objectCard;
 }
 
 // получение NodeList
 function render() {
-    initialCards.forEach(addingCard);
+    initialCards.forEach((item) => renderCard(item));
 
 }
 
 // добавление новых карточек
-function addingCard(link) {
-    cards.prepend(creatCard(link));
+function renderCard(dataCard) {
+    cards.prepend(createTemplateCard(dataCard));
 }
 
 // Сохранение новой карточки
 function addCard(evt) {
     evt.preventDefault();
-    addingCard({ name: popupCardInputTitle.value, link: popupCardInputLink.value });
+    renderCard({ name: popupCardInputTitle.value, link: popupCardInputLink.value });
     closePopup(popupCards);
 }
-render();
 
+render();
 
 // =======================================POPUPS=================================================
 
@@ -182,3 +184,4 @@ btnPopupImgClose.addEventListener('click', closePopupImg);
 btnPopupProfileClose.addEventListener('click', closePopupProfile);
 btnPopupCloseCard.addEventListener('click', closePopupCard);
 btnSaveCard.addEventListener('click', addCard);
+

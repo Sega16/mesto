@@ -1,6 +1,6 @@
 
-import Card from "./card.js";
-console.log(Card)
+import {Card, initialCards} from "./card.js";
+import { FormValidator, config } from "./formValidator.js";
 
 const popupItem = Array.from(document.querySelectorAll('.popup'));
 
@@ -36,57 +36,31 @@ const btnPopupImgClose = document.querySelector('.popup__close_img');
 const popupImgCaption = document.querySelector('.img-caption');
 
 // =============================================CARDS VARIABLES======================================//
-const templateCard = document.querySelector('#template-card').content;
+
 const cards = document.querySelector('.cards');
 
 
-// ========================================DELETE AND LIKE CARD=====================================//
+// ==========================================CARDS=============================================//
 
-
-// слушатели удаления, лайка и выбора картинки
-function addListeners(card, data) {
-    card.querySelector('.card__delete').addEventListener('click', deleteCard);
-    card.querySelector('.card__like').addEventListener('click', likeCard);
-    card.querySelector('.card__img').addEventListener('click', function () {
-        openPopupPic(data)
-    });
-}
-
-// удаление карточки
-function deleteCard(evt) {
-    evt.target.closest('.card').remove();
-}
-
-// лайк карточки
-function likeCard(evt) {
-    evt.target.closest('.card__like').classList.toggle('card__like_active');
-}
-
-
-// ==========================================TEMPLATE=============================================//
-
-// шаблон создания карточки
-function createTemplateCard(dataCard) {
-    const objectCard = templateCard.cloneNode(true);
-    objectCard.querySelector('.card__text').textContent = dataCard.name;
-    objectCard.querySelector('.card__img').src = dataCard.link;
-    objectCard.querySelector('.card__img').alt = dataCard.name;
-    addListeners(objectCard, dataCard);
+// создание карточки
+function createCard(dataCard) {
+    const templateCard = new Card(dataCard, '.card', openPopupPic)
+    const objectCard = templateCard.createTemplateCard();
     return objectCard;
 }
 
-// получение NodeList
+// получение списка начальных карточек
 function render() {
-    initialCards.forEach((item) => renderCard(item));
-
+    initialCards.forEach(renderCard);
 }
 
 // добавление новых карточек
-function renderCard(dataCard) {
-    cards.prepend(createTemplateCard(dataCard));
+function renderCard(item) {
+    const cardItem = createCard(item)
+    cards.prepend(cardItem);
 }
 
-// Сохранение новой карточки
+// cохранение новой карточки
 function addCard(evt) {
     evt.preventDefault();
     renderCard({ name: popupCardInputTitle.value, link: popupCardInputLink.value });
@@ -94,6 +68,14 @@ function addCard(evt) {
 }
 
 render();
+
+// =======================================VALIDATION============================================
+
+const popupForms = Array.from(document.querySelectorAll('.popup__form'));
+popupForms.forEach((formItem) => {
+    const valid = new FormValidator(config, formItem);
+    valid.enableValidation();
+});
 
 // =======================================POPUPS=================================================
 
@@ -131,10 +113,9 @@ function saveProfileInformation(evt) {
 }
 
 // открытие попапа новой карточки
-function createCard() {
+function createNewCard() {
     popupFormCards.reset();
     openPopup(popupCards);
-    checkСonditionBtn(config, btnSaveCard, popupFormCards);
 }
 
 // закрытие попапа новой карточки
@@ -143,11 +124,11 @@ function closePopupCard() {
 }
 
 // открытие попапа картинки
-function openPopupPic(data) {
+function openPopupPic(name, link) {
     openPopup(popupImg);
-    popupimgView.src = data.link;
-    popupImgCaption.textContent = data.name;
-    popupimgView.alt = data.name;
+    popupimgView.src = link;
+    popupImgCaption.textContent = name;
+    popupimgView.alt = name;
 }
 
 // закрытие попапа картинки 
@@ -177,7 +158,7 @@ function closeByEsc(evt) {
     };
 }
 
-btnAddCard.addEventListener('click', createCard);
+btnAddCard.addEventListener('click', createNewCard);
 btnEdit.addEventListener('click', editProfile);
 popupForm.addEventListener('submit', saveProfileInformation);
 btnPopupImgClose.addEventListener('click', closePopupImg);

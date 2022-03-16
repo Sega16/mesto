@@ -5,13 +5,12 @@ class Card {
     this._link = data.link;
     this._selector = selector;
     this._openPopupPic = openPopupPic;
-
   }
 
   // получение шаблона карточки
   _getTemplate() {
     this._objectCard = document.
-      querySelector('#template-card').
+      querySelector(this._selector).
       content.querySelector('.card').
       cloneNode(true);
     return this._objectCard;
@@ -49,34 +48,8 @@ class Card {
   // удаление карточки
   _deleteCard() {
     this._item.remove();
+    delete this._item;
   }
 }
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Нижний Тагил',
-    link: './images/Tagil.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Рейнисфияра',
-    link: './images/Black-beach.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
-export { Card, initialCards };
+export { Card };

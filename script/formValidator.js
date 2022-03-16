@@ -10,6 +10,9 @@ class FormValidator {
   constructor(config, formItem) {
     this._config = config;
     this._formItem = formItem;
+    this._popupInputs = Array.from(this._formItem.querySelectorAll(config.inputSelector));
+    this._btn = this._formItem.querySelector(config.submitButtonSelector);
+
   }
 
   // валидация
@@ -19,8 +22,6 @@ class FormValidator {
 
   // валидация всех инпутов
   _setEventListeners() {
-    this._popupInputs = Array.from(this._formItem.querySelectorAll(config.inputSelector));
-    this._btn = this._formItem.querySelector(config.submitButtonSelector);
     this._checkСonditionBtn();
     this._popupInputs.forEach((inputItem) => {
       inputItem.addEventListener('input', () => {
@@ -62,6 +63,17 @@ class FormValidator {
     this._formError = this._formItem.querySelector(`.${inputItem.id}-error`);
     inputItem.classList.remove(config.inputErrorClass);
     this._formError.textContent = "";
+  }
+  _resetError() {
+    this._popupInputs.forEach((inputItem) => {
+      this._hideInputError(inputItem);
+    });
+    this._checkСonditionBtn();
+  }
+
+  _disableSubmitButton() {
+    this._btn.classList.add(this._config.inactiveButtonClass);
+    this._btn.disabled = true;
   }
 }
 

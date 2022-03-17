@@ -64,14 +64,14 @@ class FormValidator {
     inputItem.classList.remove(config.inputErrorClass);
     this._formError.textContent = "";
   }
-  _resetError() {
+  resetError() {
     this._popupInputs.forEach((inputItem) => {
       this._hideInputError(inputItem);
     });
     this._checkСonditionBtn();
   }
 
-  _disableSubmitButton() {
+  disableSubmitButton() {
     this._btn.classList.add(this._config.inactiveButtonClass);
     this._btn.disabled = true;
   }

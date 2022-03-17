@@ -125,7 +125,7 @@ function editProfile() {
     openPopup(popupProfile);
     popupName.value = profileName.textContent;
     popupAbout.value = profileAdout.textContent;
-    editProfileValidator._resetError();
+    editProfileValidator.resetError();
 }
 
 // закрытие попапа профиля
@@ -188,8 +188,8 @@ function closeByEsc(evt) {
 }
 
 btnAddCard.addEventListener('click', () => {
-    addCardValidstor._resetError();
-    addCardValidstor._disableSubmitButton();
+    addCardValidstor.resetError();
+    addCardValidstor.disableSubmitButton();
     openPopupNewCard();
 });
 btnEdit.addEventListener('click', editProfile);

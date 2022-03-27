@@ -4,7 +4,7 @@ class Card {
     this._name = data.name;
     this._link = data.link;
     this._selector = selector;
-    this._openPopupPic = openPopupPic;
+    this._handleCardClick = openPopupPic;
   }
 
   // получение шаблона карточки
@@ -30,7 +30,7 @@ class Card {
   // слушатели лайка удаления открытия карточки
   _addListeners() {
     this._imgCard.addEventListener('click', () => {
-      this._openPopupPic(this._name, this._link);
+      openPopupPic(this._name, this._link);
     });
     this._item.querySelector('.card__like').addEventListener('click', (evt) => {
       this._likeCard(evt);
@@ -48,7 +48,7 @@ class Card {
   // удаление карточки
   _deleteCard() {
     this._item.remove();
-    delete this._item;
+    this._item = null;
   }
 }
 

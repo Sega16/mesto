@@ -1,5 +1,5 @@
 
-class UserInfo {
+export class UserInfo {
     constructor({ profileNameSelector, profileJobSelector }) {
         this._nameElement = document.querySelector(profileNameSelector);
         this._jobElement = document.querySelector(profileJobSelector);
@@ -15,5 +15,3 @@ class UserInfo {
         this._jobElement.textContent = job;
     }
 }
-
-export { UserInfo };

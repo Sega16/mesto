@@ -1,11 +1,14 @@
-const initialCards = [
+export const Tagil = new URL('../images/Tagil.jpg', import.meta.url);
+export const BlackBeach = new URL('../images/Black-beach.jpg', import.meta.url);
+
+export const initialCards = [
     {
         name: 'Архыз',
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
     },
     {
         name: 'Нижний Тагил',
-        link: './images/Tagil.jpg'
+        link: Tagil
     },
     {
         name: 'Иваново',
@@ -17,7 +20,7 @@ const initialCards = [
     },
     {
         name: 'Рейнисфияра',
-        link: './images/Black-beach.jpg'
+        link: BlackBeach
     },
     {
         name: 'Байкал',
@@ -25,12 +28,10 @@ const initialCards = [
     }
 ];
 
- const config = {
+export  const config = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__btn',
     inactiveButtonClass: 'popup__btn_inactive',
     inputErrorClass: 'popup__input_type_error',
   }
-
-  export {config, initialCards};

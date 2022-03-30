@@ -1,10 +1,11 @@
 import { Popup } from "./popup.js";
 
- class PopupWithForm extends Popup {
-    constructor(handleSubmit, selectorPopup) {
-        super(selectorPopup);
+ export class PopupWithForm extends Popup {
+    constructor(popupSelector, handleSubmit) {
+        super(popupSelector);
         this._handleSubmit = handleSubmit;
         this._popupForm = this._popup.querySelector('.popup__form');
+        
     }
 
     // собираем данные полей формы
@@ -19,15 +20,16 @@ import { Popup } from "./popup.js";
 
     setEventListeners() {
         super.setEventListeners();
-        this._popupForm.addEventlistener('submit', () => {
+        this._popupForm.addEventlistener("submit", (evt) => {
+            evt.preventDefault();
             this._handleSubmit(this._getInputValues());
+            this._closePopup();
         });
     }
 
     closePopup() {
+        
         super.closePopup();
         this._popupForm.reset();
     }
 }
-
-export {PopupWithForm};

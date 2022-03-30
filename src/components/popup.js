@@ -1,9 +1,7 @@
 
-class Popup {
-    constructor(selectorPopup) {
-        this._selectorPopup = selectorPopup;
-        this._popup = document.querySelector(selectorPopup);
-        this.closeBtn = this._popup.querySelector('.popup__close');
+export class Popup {
+    constructor(popupSelector) {
+        this._popup = document.querySelector(popupSelector);
         this._handleEscClose = this._handleEscClose.bind(this);
     }
 
@@ -21,20 +19,20 @@ class Popup {
 
     // закрытие по Esc
     _handleEscClose(evt) {
-        if(evt.key === 'Escape') {
+        if (evt.key === 'Escape') {
             this.closePopup();
         }
     }
 
     // закрытие кликом по оверлэй и кнопке крестику
     setEventListeners() {
-        this._popup.addEventListener('click', (evt) => {
-            if(evt.target.classList.contains('.popup_opened') ||
-            evt.target.classList.contains('.popup__close')) {
-                this._closePopup();
+        const closeBtn = this._popup.querySelector(".popup__close");
+
+        this._popup.addEventListener('mousedown', (evt) => {
+            if(evt.target.classList.contains('popup_opened') || 
+            evt.target.classList.contains('popup__close')) {
+                this.closePopup();
             }
-        });
+        })
     }
 }
-
-export {Popup};

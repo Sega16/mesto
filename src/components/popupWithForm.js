@@ -20,10 +20,9 @@ import { Popup } from "./popup.js";
 
     setEventListeners() {
         super.setEventListeners();
-        this._popupForm.addEventlistener("submit", (evt) => {
+        this._popupForm.addEventListener("submit", (evt) => {
             evt.preventDefault();
             this._handleSubmit(this._getInputValues());
-            this._closePopup();
         });
     }
 

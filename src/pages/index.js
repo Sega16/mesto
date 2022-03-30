@@ -38,7 +38,7 @@ addCardValidator.enableValidation();
 // =====================================POPUPS=======================================================//
 
 // открытие попапа профиля
-btnEdit.addEventListener('.click', () => {
+btnEdit.addEventListener('click', () => {
     const { name, job } = userInfo.getUserInfo();
     popupName.value = name;
     popupAbout.value = job;
@@ -47,10 +47,10 @@ btnEdit.addEventListener('.click', () => {
 })
 
 // открытие попапа новой карточки
-btnAddCard.addEventListener('.click', () => {
+btnAddCard.addEventListener('click', () => {
     addCardValidator.resetError();
     addCardValidator.disableSubmitButton();
-    cardPopup.openPopup();
+    cardPopupCreate.openPopup();
 })
 
 // ==========================================PROFILE===============================================//
@@ -58,7 +58,7 @@ btnAddCard.addEventListener('.click', () => {
 // редактирование имени
 const handleProfileFormSubmite = (data) => {
     const { name, job } = data;
-    userInfo.setUserinfo(name, job);
+    userInfo.setUserInfo(name, job);
     profilePopupEdit.closePopup();
 }
 

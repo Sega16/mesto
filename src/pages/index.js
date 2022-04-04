@@ -1,11 +1,11 @@
 
 import Card from "../components/card.js";
-import { FormValidator } from "../components/formValidator.js";
-import { Section } from "../components/section.js";
+import { FormValidator } from "../components/FormValidator.js";
+import { Section } from "../components/Section.js";
 import { initialCards, config } from "../utils/constants.js";
-import { PopupWithImage } from '../components/popupWithImage.js';
-import { PopupWithForm } from "../components/popupWithForm.js";
-import { UserInfo } from "../components/userInfo.js";
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { UserInfo } from "../components/UserInfo.js";
 import "../pages/index.css";
 
 // ===========================================PROFILE VARIABLES===================================//
@@ -26,11 +26,11 @@ const popupCards = document.querySelector('.popup_cards');
 
 // =======================================VALIDATION============================================
 
-const addCardForm = popupCards.querySelector('.popup__form');
+const cardAddForm = popupCards.querySelector('.popup__form');
 const editProfileForm = popupProfile.querySelector('.popup__form');
 
 const editProfileValidator = new FormValidator(config, editProfileForm);
-const addCardValidator = new FormValidator(config, addCardForm);
+const addCardValidator = new FormValidator(config, cardAddForm);
 
 editProfileValidator.enableValidation();
 addCardValidator.enableValidation();

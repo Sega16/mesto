@@ -1,10 +1,14 @@
 
 export default class Card {
-  constructor(data, selector, openPopupPic) {
+  constructor(data, selector, openPopupPic, handleDeleteClick) {
     this._name = data.name;
     this._link = data.link;
+    this._likes = data.likes;
+    this._id = data.id;
+
     this._selector = selector;
     this._openPopupPic = openPopupPic;
+    this._handleDeleteClick = handleDeleteClick;
   }
 
   // получение шаблона карточки
@@ -14,6 +18,11 @@ export default class Card {
       content.querySelector('.card').
       cloneNode(true);
     return objectCard;
+  }
+
+  _setLikes() {
+   const likeCountElement = this._item.querySelector('.card__like-count')
+   likeCountElement.textContent = this._likes.length
   }
 
   // сборка шаблона карточки
@@ -29,6 +38,9 @@ export default class Card {
     this._delete = this._item.querySelector('.card__delete');
 
     this._addListeners();
+
+    this._setLikes();
+
     return this._item;
   }
 
@@ -37,12 +49,12 @@ export default class Card {
     this._imgCard.addEventListener('click', () => {
       this._openPopupPic(this._name, this._link);
     });
-    this._like.addEventListener('click', (evt) => {
-      this._likeCard(evt);
+    this._like.addEventListener('click', () => {
+      this._likeCard();
     });
-    this._delete.addEventListener('click', (evt) => {
-      this._deleteCard(evt);
-    })
+    this._delete.addEventListener('click', () => {
+      this._handleDeleteClick(this._id);
+    });
   }
 
   // лайк карточки
@@ -51,7 +63,7 @@ export default class Card {
   }
 
   // удаление карточки
-  _deleteCard() {
+  deleteCard() {
     this._item.remove();
     this._item = null;
   }

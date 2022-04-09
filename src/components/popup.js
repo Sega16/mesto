@@ -3,6 +3,7 @@ export class Popup {
     constructor(popupSelector) {
         this._popup = document.querySelector(popupSelector);
         this._handleEscClose = this._handleEscClose.bind(this);
+        // this._closeBtn = this._popup.querySelector('.popup__close')
     }
 
     // открытие попапа
@@ -26,7 +27,7 @@ export class Popup {
 
     // закрытие кликом по оверлэй и кнопке крестику
     setEventListeners() {
-        const closeBtn = this._popup.querySelector(".popup__close");
+       const closeBtn = this._popup.querySelector(".popup__close");
 
         this._popup.addEventListener('mousedown', (evt) => {
             if(evt.target.classList.contains('popup_opened') || 

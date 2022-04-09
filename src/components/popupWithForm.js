@@ -18,6 +18,10 @@ import { Popup } from "./Popup.js";
         return values;
     }
 
+    changeSubmitHandler(newSubmitHandler) {
+        this._handleSubmit = newSubmitHandler
+    }
+
     setEventListeners() {
         super.setEventListeners();
         this._popupForm.addEventListener("submit", (evt) => {

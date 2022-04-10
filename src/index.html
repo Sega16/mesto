@@ -14,7 +14,9 @@
     </header>
     <main class="content">
         <section class="profile">
-            <img class="profile__img" src="<%=require('./images/Avatar.png')%>" alt="фото профиля">
+            <div class="profile__wrapper">
+                <button class="profile__avatar"></button>
+            </div>
             <div class="profile__info">
                 <div class="profile__text">
                     <h1 class="profile__title"></h1>
@@ -28,6 +30,20 @@
 
         </section>
     </main>
+
+    <section class="popup popup_avatar">
+        <div class="popup__container">
+            <button class="popup__close" type="button"></button>
+            <h2 class="popup__title">Обновить аватар</h2>
+            <form class="popup__form popup__form_avatar" novalidate>
+                <input name='link' id="urlAvatar-input" class="popup__input popup__input-avatar" type="url" required
+                    placeholder="Ссылка на фотографию">
+                <span class="urlAvatar-input-error popup__error"></span>
+                <button class="popup__btn popup__button_card" type="submit">Сохранить</button>
+            </form>
+        </div>
+    </section>
+
     <div class="popup popup_profile">
         <div class="popup__container">
             <button type="button" class="popup__close popup__close_profile link"></button>
@@ -58,10 +74,11 @@
             </form>
         </div>
     </div>
+
     <div class="popup popup_cards_delete-confirm">
-        <div class="popup__container">
+        <div class="popup__container popup__container_delete">
             <button type="button" class="popup__close popup__close_card link"></button>
-            <h2 class="popup__title">Вы уверены?</h2>
+            <h2 class="popup__title popup__title_delete">Вы уверены?</h2>
             <form class="popup__form popup__form_cards" novalidate>
                 <button type="submit" class="popup__btn popup__btn_save_card">Да</button>
             </form>
@@ -77,11 +94,13 @@
     <template class="template-card">
         <div class="card">
             <button type="button" class="card__delete"></button>
-            <img class="card__img" src="./images/Karachaevsk.png" alt="Карачаевск">
+            <img class="card__img" src="" alt="Карачаевск">
             <div class="card__name">
-                <h3 class="card__text">Карачаевск</h3>
-                <button type="button" class="card__like"></button>
-                <span class="card__like-count"></span>
+                <h3 class="card__text"></h3>
+                <div class="card__like-block">
+                    <button type="button" class="card__like"></button>
+                    <span class="card__like-count"></span>
+                </div>
             </div>
         </div>
     </template>

@@ -12,7 +12,7 @@ export class FormValidator {
     );
   }
 
-// добавляем класс с ошибкой
+// // добавляем класс с ошибкой
 _showInputError(inputItem, errorMassage) {
   this._formError = this._formItem.querySelector(`.${inputItem.id}-error`);
   inputItem.classList.add(this._config.inputErrorClass);
@@ -26,7 +26,7 @@ _hideInputError(inputItem) {
   this._formError.textContent = "";
 }
 
-// проверка валидности поля и вызов ошибки
+// // проверка валидности поля и вызов ошибки
 _checkInputValidity(inputItem) {
   if (!inputItem.checkValidity()) {
     this._showInputError(inputItem, inputItem.validationMessage);

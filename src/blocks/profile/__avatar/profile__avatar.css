@@ -4,6 +4,7 @@
     width: 120px;
     height: 120px;
     background-size: cover;
+    background-position: center;
 }
 
 .profile__avatar:hover {

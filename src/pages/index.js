@@ -49,25 +49,39 @@ btnEdit.addEventListener('click', () => {
     const { name, job } = userInfo.getUserInfo();
     popupName.value = name;
     popupAbout.value = job;
-    editProfileValidator.disableSubmitButton();
+    addCardValidator.resetValidation();
     profilePopupEdit.openPopup();
 })
 
 // открытие попапа новой карточки
 btnAddCard.addEventListener('click', () => {
-    addCardValidator.resetError();
-    addCardValidator.disableSubmitButton();
+    addCardValidator.resetValidation();
+    // addCardValidator.disableSubmitButton();
     cardPopupCreate.openPopup();
 })
 
 // ==========================================PROFILE===============================================//
+
+Promise.all([api.getProfile(), api.getCards()])
+    .then(([userData, cards]) => {
+        userInfo.setUserInfo(userData.name, userData.about);
+        userInfo.setUseravatar(userData.avatar);
+        userId = userData._id;
+
+        const allUsersCards = [];
+        cards.forEach(item => {
+            allUsersCards.push(createCard(item));
+        })
+        allUsersCards.reverse();
+        section.renderItems(allUsersCards);
+    })
+    .catch(err => console.log(err));
 
 api.getProfile()
     .then(res => {
         userInfo.setUserInfo(res.name, res.about)
         userInfo.setUseravatar(res.avatar)
         userId = res._id
-        urlAvatar = res.avatar;
     }).catch(console.log);
 
 // редактирование аватара
@@ -87,6 +101,7 @@ function submitEditAvatarForm(avatar) {
 // редактирование имени
 const handleProfileFormSubmite = (data) => {
     const { name, job } = data;
+    profilePopupEdit.renderLoading(true);
     api.editProfile(name, job)
         .then(res => {
             userInfo.setUserInfo(res.name, res.about);
@@ -197,8 +212,8 @@ const popupAvatar = new PopupWithForm(".popup_avatar", submitEditAvatarForm);
 const avatarEditButton = document.querySelector('.profile__wrapper');
 
 avatarEditButton.addEventListener('click', () => {
-    avatarValidatorEdit.resetError();
-    avatarValidatorEdit.disableSubmitButton();
+    avatarValidatorEdit.resetValidation();
+    // avatarValidatorEdit.disableSubmitButton();
     popupAvatar.openPopup();
 })
 

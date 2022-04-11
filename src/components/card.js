@@ -11,7 +11,6 @@ export class Card {
     this._openPopupPic = openPopupPic;
     this._handleDeleteClick = handleDeleteClick;
     this._handleLikeClick = handleLikeClick;
-    this._delete = document.querySelector('.card__delete');
   }
 
   // получение шаблона карточки
@@ -30,8 +29,8 @@ export class Card {
 
   setLikes(newLikes) {
     this._likes = newLikes;
-    const likeCountElement = this._item.querySelector('.card__like-count')
-    likeCountElement.textContent = this._likes.length
+    this._likeCountElement = this._item.querySelector('.card__like-count')
+    this._likeCountElement.textContent = this._likes.length;
     if(this.isLiked()) {
       this._fillLike();
     } else {
@@ -40,7 +39,7 @@ export class Card {
   }
 
   // сборка шаблона карточки
-  createTemplateCard() {
+  createTemplateCard() {  
     this._item = this._getTemplate();
     this._item.querySelector('.card__text').textContent = this._name;
     this._imgCard = this._item.querySelector('.card__img');

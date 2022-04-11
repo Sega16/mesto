@@ -43,8 +43,7 @@ disableSubmitButton() {
 // управление состоянием кнопки
 _checkСonditionBtn() {
   if (!this._formItem.checkValidity()) {
-    this._btn.classList.add(this._config.inactiveButtonClass);
-    this._btn.setAttribute('disabled', '');
+    this.disableSubmitButton();
   } else {
     this._btn.classList.remove(this._config.inactiveButtonClass);
     this._btn.removeAttribute('disabled');
@@ -67,7 +66,7 @@ _setEventListeners() {
     this._setEventListeners();
   }
   
-  resetError() {
+  resetValidation() {
     this._popupInputs.forEach((inputItem) => {
       this._hideInputError(inputItem);
     });

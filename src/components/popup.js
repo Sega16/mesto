@@ -4,7 +4,6 @@ export class Popup {
         this._popup = document.querySelector(popupSelector);
         this._handleEscClose = this._handleEscClose.bind(this);
         this._closeBtn = this._popup.querySelector('.popup__close')
-        this._submitButton = this._popup.querySelector('.popup__btn');
     }
 
     // открытие попапа
@@ -34,7 +33,6 @@ export class Popup {
                 this.closePopup();
             }
         });
-        this._closeBtn.addEventListener('click', () => this.closePopup());
     }
 }
 

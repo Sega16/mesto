@@ -3,6 +3,6 @@
     max-width: 282px;
     height: 282px;
     object-fit: cover;
-    object-position: 100% 100%;
+    object-position: center;
     cursor: pointer;
 }

@@ -146,15 +146,8 @@ const userInfo = new UserInfo({
 
 // создание карточки
 function createCard(data) {
-    const card = new Card(
-        {
-            name: data.name,
-            link: data.link,
-            likes: data.likes,
-            cardId: data._id,
-            ownerId: data.owner._id,
-            userId: userId
-        }, '.template-card',
+    const card = new Card( data
+        , '.template-card',
         () => {
             popupPic.openPopup(data.name, data.link);
         },

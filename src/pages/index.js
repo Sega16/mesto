@@ -61,6 +61,17 @@ btnAddCard.addEventListener('click', () => {
 
 // ==========================================PROFILE===============================================//
 
+Promise.all([api.getProfile(), api.getCards()])
+    .then(([userData, cards]) => {
+        userInfo.setUserInfo(userData.name, userData.about);
+        userInfo.setUseravatar(userData.avatar);
+        userId = userData._id;
+        const usersCards = [];
+        usersCards.reverse();
+        section.renderItems(cards.reverse());
+    })
+    .catch(err => console.log(err));
+
 // api.getProfile()
 //     .then(res => {
 //         userInfo.setUserInfo(res.name, res.about)
@@ -95,21 +106,8 @@ const section = new Section(
         },
     },
     ".cards",
-)
 
-Promise.all([api.getProfile(), api.getCards()])
-    .then(([userData, cards]) => {
-        userInfo.setUserInfo(userData.name, userData.about);
-        userInfo.setUseravatar(userData.avatar);
-        userId = userData._id;
-        const usersCards = [];
-        cards.forEach(item => {
-            usersCards.push(createCard(item));
-        })
-        usersCards.reverse();
-        section.renderItems(usersCards);
-    })
-    .catch(err => console.log(err));
+)
 
 // редактирование аватара
 function submitEditAvatarForm(avatar) {
@@ -146,15 +144,17 @@ const userInfo = new UserInfo({
 });
 // ==========================================CARDS=============================================//
 
-
-
-// renderItems(items);
-
-
-
 // создание карточки
 function createCard(data) {
-    const card = new Card(data, '.template-card',
+    const card = new Card(
+        {
+            name: data.name,
+            link: data.link,
+            likes: data.likes,
+            cardId: data._id,
+            ownerId: data.owner._id,
+            userId: userId
+        }, '.template-card',
         () => {
             popupPic.openPopup(data.name, data.link);
         },
@@ -169,12 +169,14 @@ function createCard(data) {
             });
         },
         (id) => {
+            console.log('like')
             if (card.isLiked()) {
                 api.deleteLike(id)
                     .then(res => {
                         card.setLikes(res.likes);
                     });
-            } else {
+            }
+            else {
                 api.addLike(id)
                     .then(res => {
                         card.setLikes(res.likes);
@@ -207,6 +209,7 @@ function handleCardAddSubmit(data) {
             cardPopupCreate.renderLoading(false);
         });
 }
+
 
 
 const popupPic = new PopupWithImage('.popup_img')

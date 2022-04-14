@@ -11,6 +11,8 @@ export class Card {
     this._openPopupPic = openPopupPic;
     this._handleDeleteClick = handleDeleteClick;
     this._handleLikeClick = handleLikeClick;
+    this._cardDelete = document.querySelector('.card__delete');
+    // console.log('data', data)
   }
 
   // получение шаблона карточки
@@ -27,6 +29,7 @@ export class Card {
     return userlikedCard;
   }
 
+// счетчик лайков
   setLikes(newLikes) {
     this._likes = newLikes;
     this._likeCountElement = this._item.querySelector('.card__like-count')
@@ -50,6 +53,7 @@ export class Card {
     this.setLikes(this._likes);
     if(this._ownerId !== this._userId) {
       this._item.querySelector('.card__delete').style.display = 'none';
+      
     }
     return this._item;
   }

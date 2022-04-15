@@ -61,54 +61,6 @@ btnAddCard.addEventListener('click', () => {
 
 // ==========================================PROFILE===============================================//
 
-Promise.all([api.getProfile(), api.getCards()])
-    .then(([userData, cards]) => {
-        userInfo.setUserInfo(userData.name, userData.about);
-        userInfo.setUseravatar(userData.avatar);
-        userId = userData._id;
-        const usersCards = [];
-        usersCards.reverse();
-        section.renderItems(cards.reverse());
-    })
-    .catch(err => console.log(err));
-
-// api.getProfile()
-//     .then(res => {
-//         userInfo.setUserInfo(res.name, res.about)
-//         userInfo.setUseravatar(res.avatar)
-//         userId = res._id
-//     }).catch(console.log);
-
-//     api.getCards()
-//     .then(cardList => {
-//         cardList.forEach(data => {
-//             const newCard = createCard({
-//                 name: data.name,
-//                 link: data.link,
-//                 likes: data.likes,
-//                 id: data._id,
-//                 userId: userId,
-//                 ownerId: data.owner._id,
-//                 avatar: data.avatar
-//             })
-// section.addItem(newCard);
-//         });
-//     }).catch(console.log);
-
-
-// получение списка начальных карточек
-const section = new Section(
-    {
-        items: [],
-        renderer: (item) => {
-            const cardElement = createCard(item);
-            section.addItem(cardElement);
-        },
-    },
-    ".cards",
-
-)
-
 // редактирование аватара
 function submitEditAvatarForm(avatar) {
     popupAvatar.renderLoading(true);
@@ -117,7 +69,7 @@ function submitEditAvatarForm(avatar) {
             userInfo.setUserInfo(res.name, res.about);
             userInfo.setUseravatar(res.avatar);
             popupAvatar.closePopup();
-        }).catch(console.log)
+        }).catch(err => console.log(err))
         .finally(() => {
             popupAvatar.renderLoading(false);
         });
@@ -131,7 +83,7 @@ const handleProfileFormSubmite = (data) => {
         .then(res => {
             userInfo.setUserInfo(res.name, res.about);
             profilePopupEdit.closePopup();
-        }).catch(console.log)
+        }).catch(err => console.log(err))
         .finally(() => {
             profilePopupEdit.renderLoading(false);
         });
@@ -144,9 +96,21 @@ const userInfo = new UserInfo({
 });
 // ==========================================CARDS=============================================//
 
+// получение списка начальных карточек
+const section = new Section(
+    {
+        items: [],
+        renderer: (item) => {
+            const cardElement = createCard(item);
+            section.addItem(cardElement);
+        },
+    },
+    ".cards",
+)
+
 // создание карточки
 function createCard(data) {
-    const card = new Card( data
+    const card = new Card(data
         , '.template-card',
         () => {
             popupPic.openPopup(data.name, data.link);
@@ -158,22 +122,20 @@ function createCard(data) {
                     .then(res => {
                         card.deleteCard();
                         confirmPopup.closePopup();
-                    }).catch(console.log);
+                    }).catch(err => console.log(err))
             });
         },
         (id) => {
-            console.log('like')
             if (card.isLiked()) {
                 api.deleteLike(id)
                     .then(res => {
-                        card.setLikes(res.likes);
-                    });
-            }
-            else {
+                        card.setLikes(res.likes)
+                    }).catch(err => console.log(err));
+            } else {
                 api.addLike(id)
                     .then(res => {
-                        card.setLikes(res.likes);
-                    }).catch(console.log);
+                        card.setLikes(res.likes)
+                    }).catch(err => console.log(err));
             }
         }
     );
@@ -197,13 +159,27 @@ function handleCardAddSubmit(data) {
             });
             section.addItem(newCard);
             cardPopupCreate.closePopup();
-        }).catch(console.log)
+        }).catch(err => console.log(err))
         .finally(() => {
             cardPopupCreate.renderLoading(false);
         });
 }
 
-
+// обьединение подгрузки инфо профиля и карточек
+Promise.all([api.getProfile(), api.getCards()])
+    .then(([userData, cards]) => {
+        userInfo.setUserInfo(userData.name, userData.about);
+        userInfo.setUseravatar(userData.avatar);
+        userId = userData._id;
+        const formattedData = cards.map(data => ({
+            ...data,
+            id: data._id,
+            userId,
+            ownerId: data.owner._id,
+        }))
+        section.renderItems(formattedData.reverse());
+    })
+    .catch(err => console.log(err));
 
 const popupPic = new PopupWithImage('.popup_img')
 const cardPopupCreate = new PopupWithForm('.popup_cards', handleCardAddSubmit);

@@ -5,7 +5,8 @@ export class UserInfo {
         this._jobElement = document.querySelector(profileJobSelector);
         this._avatar = document.querySelector(profileAvatarSelector);
     }
-
+    
+// данные профиля
     getUserInfo() {
         return {
             name: this._nameElement.textContent,
@@ -13,9 +14,9 @@ export class UserInfo {
         };
     }
     
-    setUserInfo(name, job) {
+    setUserInfo(name, about) {
         this._nameElement.textContent = name;
-        this._jobElement.textContent = job;
+        this._jobElement.textContent = about;
     }
 
     setUseravatar(link) {

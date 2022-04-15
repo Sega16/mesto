@@ -4,7 +4,7 @@ export class Card {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
-    this._id = data._id;
+    this._id = data.id;
     this._userId = data.userId;
     this._ownerId = data.ownerId;
     this._selector = selector;
@@ -30,7 +30,6 @@ export class Card {
 
 // счетчик лайков
   setLikes(newLikes) {
-    // console.log('newlikes', newLikes)
     this._likes = newLikes;
     this._likeCountElement = this._item.querySelector('.card__like-count')
     this._likeCountElement.textContent = this._likes.length;
